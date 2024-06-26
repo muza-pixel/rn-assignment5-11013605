@@ -4,6 +4,13 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import Home from './screen/Home';
 import Settings from './screen/Settings';
 import { Ionicons } from '@expo/vector-icons';
+import home from './assets/home.png'
+import Stat from './assets/statictics.png'
+import settings from './assets/settings.png'
+import { Image } from 'react-native';
+import MyCard from './screen/MyCard';
+import Statistics from './screen/Statistics';
+import card from './assets/myCards.png';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,13 +27,17 @@ function App() {
           let iconName;
 
           if (route.name === 'Home') {
-            iconName = focused ? 'ios-home' : 'ios-home-outline';
+            iconName = focused ? home : home;
+          } else if (route.name === 'MyCard') {
+            iconName = focused ? card : card; 
+          }else if (route.name === 'Statistics') {
+            iconName = focused ? Stat : Stat;
           } else if (route.name === 'Settings') {
-            iconName = focused ? 'ios-settings' : 'ios-settings-outline';
+            iconName = focused ? settings : settings;
           }
 
           // You can return any component here, but in this case, we're using Ionicons
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return <Image source={iconName} />;
         },
       })}
       tabBarOptions={{
@@ -35,6 +46,12 @@ function App() {
       }}>
         <Tab.Screen name="Home" options={{headerShown:false}}>
           {props => <Home {...props} isDarkMode={isDarkMode} />}
+        </Tab.Screen>
+        <Tab.Screen name="MyCard" options={{headerShown:false}}>
+          {props => <MyCard {...props} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />}
+        </Tab.Screen>
+        <Tab.Screen name="Statistics" options={{headerShown:false}}>
+          {props => <Statistics {...props} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />}
         </Tab.Screen>
         <Tab.Screen name="Settings" options={{headerShown:false}}>
           {props => <Settings {...props} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />}
